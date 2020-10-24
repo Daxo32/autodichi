@@ -77,7 +77,7 @@ export default function RenderFormDichiarazione() {
         _______a ______________{birthPlace}___________ (______), residente in ___________{livePlace}_____________
         (______), via ___________{liveAddress}____________ e domiciliato/a in __________{domPlace}_________
         (______), via ___________{domAddress}_____________, identificato/a a mezzo ________{docType}_______________
-        nr. ______{docNumber}______________, rilasciato da ______________{docReleasedBy}__________________
+        nr. ______{docNumber}______________, rilasciato da _______{docReleasedBy}_______
         in data ____{docReleasedDate}_____ , utenza telefonica _____{phoneNumber}______ , consapevole delle conseguenze penali
                     previste in caso di dichiarazioni mendaci a pubblico ufficiale (art. 495 c.p.)
 {/* 
@@ -90,22 +90,22 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                     previste in caso di dichiarazioni mendaci a pubblico ufficiale (art. 495 c.p.) */}
                 </Text>
                 <Text style={styles.title_small}>DICHIARA SOTTO LA PROPRIA RESPONSABILITA' </Text>
-                <Text style={styles.text}>
-                    {'->'} di essere a conoscenza delle misure normative di contenimento del contagio da COVID-19 vigenti alla
+                <Text style={styles.text_under}>
+                    {'-->'} di essere a conoscenza delle misure normative di contenimento del contagio da COVID-19 vigenti alla
                     data odierna, concernenti le limitazioni alla possibilità di spostamento delle persone fisiche all’interno del
                     territorio nazionale;
           </Text>
-                <Text style={styles.text}>
-                    {'->'} di essere a conoscenza delle altre misure e limitazioni previste da ordinanze o altri provvedimenti
+                <Text style={styles.text_under}>
+                    {'-->'} di essere a conoscenza delle altre misure e limitazioni previste da ordinanze o altri provvedimenti
                     amministrativi adottati dal Presidente della Regione o dal Sindaco ai sensi delle vigenti normative;
           </Text>
-                <Text style={styles.text}>
-                    {'->'} di essere a conoscenza delle sanzioni previste dall’art. 4 del decreto-legge 25 marzo 2020, n. 19, e dall’art.
+                <Text style={styles.text_under}>
+                    {'-->'} di essere a conoscenza delle sanzioni previste dall’art. 4 del decreto-legge 25 marzo 2020, n. 19, e dall’art.
                     2 del decreto-legge 16 maggio 2020, n. 33;
           </Text>
 
                 <Text style={styles.text}>
-                    {'->'} che lo spostamento è determinato da:
+                    {'-->'} che lo spostamento è determinato da:
           </Text>
                 <Text style={styles.text}>
                     {motivazione === 1
@@ -173,13 +173,15 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
             paddingHorizontal: 35,
         },
         title: {
-            fontSize: 19,
+            fontSize: 16,
+            fontWeight: 700,
             textAlign: 'center',
             fontFamily: 'Times-Roman',
             paddingBottom: 5,
             paddingTop: 5,
         },
         title_small: {
+            fontWeight: 700,
             fontSize: 15,
             textAlign: 'center',
             fontFamily: 'Times-Roman',
@@ -189,7 +191,14 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
             margin: 10,
             fontSize: 12,
             textAlign: 'justify',
-            fontFamily: 'Times-Roman'
+            fontFamily: 'Times-Roman',
+        },
+        text_under: {
+            margin: 10,
+            fontSize: 12,
+            textAlign: 'justify',
+            fontFamily: 'Times-Roman',
+            textDecoration: "underline"
         },
         text_small: {
             marginLeft: 12,
@@ -250,13 +259,13 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Il tuo nome e cognome</label>
-                                        <FormInput type="text" value={fullName} onChange={(e) => setFullname(e.target.value)} required placeholder="Mario Rossi" />
+                                        <FormInput type="text" defaultValue={fullName} onBlur={(e) => setFullname(e.target.value)} required placeholder="Mario Rossi" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Numero di telefono</label>
-                                        <FormInput type="tel" value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} required placeholder="" />
+                                        <FormInput type="tel" defaultValue={phoneNumber} onBlur={(e) => setPhoneNumber(e.target.value)} required placeholder="" />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -265,13 +274,13 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">La tua data di nascita</label>
-                                        <FormInput required value={birthData} onChange={(e) => setBirthData(e.target.value)} type="date" />
+                                        <FormInput required defaultValue={birthData} onBlur={(e) => setBirthData(e.target.value)} type="date" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Luogo di Nascita</label>
-                                        <FormInput required value={birthPlace} onChange={(e) => setBirthPlace(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={birthPlace} onBlur={(e) => setBirthPlace(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -280,13 +289,13 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Città di residenza</label>
-                                        <FormInput required value={livePlace} onChange={(e) => setLivePlace(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={livePlace} onBlur={(e) => setLivePlace(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Indirizzo residenza</label>
-                                        <FormInput required value={liveAddress} onChange={(e) => setLiveAdress(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={liveAddress} onBlur={(e) => setLiveAdress(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -295,13 +304,13 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Città di domicilio</label>
-                                        <FormInput required value={domPlace} onChange={(e) => setDomPlace(e.target.value)} requiredtype="text" />
+                                        <FormInput required defaultValue={domPlace} onBlur={(e) => setDomPlace(e.target.value)} requiredtype="text" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Indirizzo domicilio</label>
-                                        <FormInput required value={domAddress} onChange={(e) => setDomAddress(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={domAddress} onBlur={(e) => setDomAddress(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                             </Row><br />
@@ -311,7 +320,7 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Tipo di documento</label>
-                                        <FormSelect required value={docType} onChange={(e) => setDoctype(e.target.value)} type="text"   >
+                                        <FormSelect required defaultValue={docType} onBlur={(e) => setDoctype(e.target.value)} type="text"   >
                                             <option value="Carta di identità">Carta di identità</option>
                                             <option value="Patente di guida">Patente di guida</option>
                                             <option value="Passaporto">Passaporto</option>
@@ -321,7 +330,7 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Numero documento</label>
-                                        <FormInput required value={docNumber} onChange={(e) => setDocNumber(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={docNumber} onBlur={(e) => setDocNumber(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -329,13 +338,13 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Rilasciato da</label>
-                                        <FormInput required value={docReleasedBy} onChange={(e) => setDocReleasedBy(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={docReleasedBy} onBlur={(e) => setDocReleasedBy(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Data rilascio</label>
-                                        <FormInput required value={docReleasedDate} onChange={(e) => setDocReleasedDate(e.target.value)} type="date" />
+                                        <FormInput required defaultValue={docReleasedDate} onBlur={(e) => setDocReleasedDate(e.target.value)} type="date" />
                                     </FormGroup>
                                 </Col>
                             </Row><br />
@@ -345,13 +354,13 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                 <Col sm="12" md="12" lg="6">
                                     <FormGroup>
                                         <label>Indirizzo da cui è iniziato lo spostamento</label>
-                                        <FormInput required value={addressStart} onChange={(e) => setAddressStart(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={addressStart} onBlur={(e) => setAddressStart(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="12" lg="6">
                                     <FormGroup>
                                         <label>Indirizzo di destinazione dello spostamento</label>
-                                        <FormInput required value={addressEnd} onChange={(e) => setAddressEnd(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={addressEnd} onBlur={(e) => setAddressEnd(e.target.value)} type="text" />
                                     </FormGroup>
                                 </Col>
                             </Row><br /><br />
@@ -372,7 +381,7 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                                     (specificare)
                   </FormRadio>
                                 {motivazione === 3
-                                    ? <FormInput required value={reason} onChange={(e) => setReason(e.target.value)} type="text" />
+                                    ? <FormInput required defaultValue={reason} onBlur={(e) => setReason(e.target.value)} type="text" />
                                     : ""
                                 }
                             </FormGroup>
