@@ -399,10 +399,9 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                             <Row>
                                 <Col>
                                     <p style={{ color: "Red" }}>* I dati inseriti non vengono memorizzati ne trasmessi ad alcuno.<br />
-        *Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso.</p>
+        * Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso.</p>
                                 </Col>
                             </Row>
-
                         </Form>
                     </CardBody>
                 </Card>

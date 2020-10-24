@@ -10,8 +10,8 @@ function App() {
     <Container>
       <Row style={{ marginTop: "30px" }}>
         <Col sm="12">
-          <h2 >Genera la tua autodichiarazione</h2><br />
-          <p className="lead">
+          <h1 className="text-center">Genera la tua autodichiarazione</h1><br />
+          <p className="lead text-center">
             Compila i campi seguenti per generare la tua autodichiarazione per poter circolare!
           </p>
           <Alert theme="light">
@@ -20,6 +20,12 @@ function App() {
         </Col>
       </Row>
       <RenderFormDichiarazione />
+      <footer class="my-5 pt-5 text-muted text-center text-small">
+        <p class="mb-1">&copy; 2020 <a target="_blank" href="https://www.linkedin.com/in/davide-canci-638a77140/">Davide Canci</a>
+        &nbsp;-&nbsp;
+        <a target="_blank" href="https://github.com/Daxo32/autodichi">Source Code</a>
+        </p>
+      </footer>
     </Container>
 
   );
