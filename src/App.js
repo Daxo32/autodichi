@@ -10,8 +10,8 @@ function App() {
     <Container>
       <Row style={{ marginTop: "30px" }}>
         <Col sm="12">
-          <h2 className="enroll-title">Genera la tua autodichiarazione</h2><br />
-          <p class="lead">
+          <h2 >Genera la tua autodichiarazione</h2><br />
+          <p className="lead">
             Compila i campi seguenti per generare la tua autodichiarazione per poter circolare!
           </p>
           <Alert theme="light">
