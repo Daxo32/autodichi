@@ -10,7 +10,7 @@ function App() {
     <Container>
       <Row style={{ marginTop: "30px" }}>
         <Col sm="12">
-          <h1 className="text-center">Genera la tua autodichiarazione</h1><br />
+          <h2 className="text-center">Genera la tua autodichiarazione</h2><br />
           <p className="lead text-center">
             Compila i campi seguenti per generare la tua autodichiarazione per poter circolare!
           </p>

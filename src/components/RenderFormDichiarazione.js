@@ -25,22 +25,22 @@ export default function RenderFormDichiarazione() {
 
     const [phoneNumber, setPhoneNumber] = useState("")
     var userData = {
-        fullName: 'fullName',
-        birthData: 'birthData',
+        fullName: '',
+        birthData: '',
         birthPlace: '',
-        livePlace: 'livePlace',
-        liveAddress: 'liveAddress',
-        domPlace: 'domPlace',
-        domAddress: 'domAddress',
-        docType: 'docType',
-        docNumber: 'docNumber',
-        docReleasedBy: 'docReleasedBy',
-        docReleasedDate: 'sedDate',
-        reason: 'reason',
-        motivazione: 'motivazione',
-        addressStart: 'addressStart',
-        addressEnd: 'addressEnd',
-        phoneNumber: 'phoneNumber'
+        livePlace: '',
+        liveAddress: '',
+        domPlace: '',
+        domAddress: '',
+        docType: '',
+        docNumber: '',
+        docReleasedBy: '',
+        docReleasedDate: '',
+        reason: '',
+        motivazione: '',
+        addressStart: '',
+        addressEnd: '',
+        phoneNumber: ''
     }
 
 
@@ -80,14 +80,6 @@ export default function RenderFormDichiarazione() {
         nr. ______{docNumber}______________, rilasciato da _______{docReleasedBy}_______
         in data ____{docReleasedDate}_____ , utenza telefonica _____{phoneNumber}______ , consapevole delle conseguenze penali
                     previste in caso di dichiarazioni mendaci a pubblico ufficiale (art. 495 c.p.)
-{/* 
-Il/La sottoscritto/a {fullName} , nato/a il {birthData}
-        a {birthPlace} (______), residente in {livePlace}
-        (______), via {liveAddress} e domiciliato/a in {domPlace}
-        (______), via {domAddress}, identificato/a a mezzo {docType}
-        nr. {docNumber}, rilasciato da {docReleasedBy}
-        in data {docReleasedDate} , utenza telefonica {phoneNumber} , consapevole delle conseguenze penali
-                    previste in caso di dichiarazioni mendaci a pubblico ufficiale (art. 495 c.p.) */}
                 </Text>
                 <Text style={styles.title_small}>DICHIARA SOTTO LA PROPRIA RESPONSABILITA' </Text>
                 <Text style={styles.text_under}>
@@ -389,7 +381,7 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                             <hr />
                             <Row>
                                 <Col sm="12">
-                                    <FormCheckbox checked={saveData} onChange={(e) => { setSaveData(e.target.value) }}>Salva le info sul dispositivo per la prossima volta</FormCheckbox>
+                                    <FormCheckbox checked={saveData} onChange={(e) => { setSaveData(!saveData) }}>Salva le info sul dispositivo per la prossima volta</FormCheckbox>
                                     <div>
                                         <DownloadPdf />
                                     </div>
@@ -399,7 +391,9 @@ Il/La sottoscritto/a {fullName} , nato/a il {birthData}
                             <Row>
                                 <Col>
                                     <p style={{ color: "Red" }}>* I dati inseriti non vengono memorizzati ne trasmessi ad alcuno.<br />
-        * Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso.</p>
+        * Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso.<br />
+        * Codice sorgente disponibile al seguente <a href="https://github.com/Daxo32/autodichi">LINK</a></p>
+
                                 </Col>
                             </Row>
                         </Form>
