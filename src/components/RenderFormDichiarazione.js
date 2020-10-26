@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { Row, Col, Form, FormGroup, FormInput, Card, CardBody, FormRadio, Button, FormCheckbox, FormSelect } from "shards-react";
+import { Row, Col, Form, FormGroup, FormInput, Card, CardBody, FormRadio, Button, FormCheckbox, FormSelect, Alert } from "shards-react";
 import '../css/formDichiarazione_style.css';
-import { Page, Text, Document, StyleSheet, PDFDownloadLink } from '@react-pdf/renderer';
-
+import { PDFDownloadLink } from '@react-pdf/renderer';
+import RenderPDF from './LayoutPDF'
 
 export default function RenderFormDichiarazione() {
+    //Dichiaro gli Hook delle info
     const [fullName, setFullname] = useState("")
     const [birthData, setBirthData] = useState("")
     const [birthPlace, setBirthPlace] = useState("")
@@ -20,11 +21,12 @@ export default function RenderFormDichiarazione() {
     const [motivazione, setMotivazione] = useState()
     const [addressStart, setAddressStart] = useState("")
     const [addressEnd, setAddressEnd] = useState("")
-
+    const [phoneNumber, setPhoneNumber] = useState("")
+    //Hook per localstorage
     const [saveData, setSaveData] = useState(false)
 
-    const [phoneNumber, setPhoneNumber] = useState("")
-    var userData = {
+
+    var userData = { //oggetto, lo uso per salvare nel localStorage se richiesto
         fullName: '',
         birthData: '',
         birthPlace: '',
@@ -47,7 +49,7 @@ export default function RenderFormDichiarazione() {
 
     useEffect(() => {
         userData = localStorage.getItem('userData')
-        if (userData) {
+        if (userData) { //Se trovo dati salvati nel localStorage li carico
             var data = JSON.parse(userData)
             setFullname(data.fullName)
             setBirthData(data.birthData)
@@ -68,148 +70,33 @@ export default function RenderFormDichiarazione() {
         }
     }, [])
 
-    const TestPDF = () => (
-        <Document>
-            <Page style={styles.body}>
-                <Text style={styles.title}>AUTODICHIARAZIONE AI SENSI DEGLI ARTT. 46 E 47 D.P.R. N. 445/2000 </Text>
-                <Text style={styles.text}>
-                    Il/La sottoscritto/a _____________{fullName}______________ , nato/a il {birthData}
-        _______a ______________{birthPlace}___________ (______), residente in ___________{livePlace}_____________
-        (______), via ___________{liveAddress}____________ e domiciliato/a in __________{domPlace}_________
-        (______), via ___________{domAddress}_____________, identificato/a a mezzo ________{docType}_______________
-        nr. ______{docNumber}______________, rilasciato da _______{docReleasedBy}_______
-        in data ____{docReleasedDate}_____ , utenza telefonica _____{phoneNumber}______ , consapevole delle conseguenze penali
-                    previste in caso di dichiarazioni mendaci a pubblico ufficiale (art. 495 c.p.)
-                </Text>
-                <Text style={styles.title_small}>DICHIARA SOTTO LA PROPRIA RESPONSABILITA' </Text>
-                <Text style={styles.text_under}>
-                    {'-->'} di essere a conoscenza delle misure normative di contenimento del contagio da COVID-19 vigenti alla
-                    data odierna, concernenti le limitazioni alla possibilità di spostamento delle persone fisiche all’interno del
-                    territorio nazionale;
-          </Text>
-                <Text style={styles.text_under}>
-                    {'-->'} di essere a conoscenza delle altre misure e limitazioni previste da ordinanze o altri provvedimenti
-                    amministrativi adottati dal Presidente della Regione o dal Sindaco ai sensi delle vigenti normative;
-          </Text>
-                <Text style={styles.text_under}>
-                    {'-->'} di essere a conoscenza delle sanzioni previste dall’art. 4 del decreto-legge 25 marzo 2020, n. 19, e dall’art.
-                    2 del decreto-legge 16 maggio 2020, n. 33;
-          </Text>
-
-                <Text style={styles.text}>
-                    {'-->'} che lo spostamento è determinato da:
-          </Text>
-                <Text style={styles.text}>
-                    {motivazione === 1
-                        ? "(x) comprovate esigenze lavorative;"
-                        : "( ) comprovate esigenze lavorative;"
-                    }
-
-                </Text>
-                <Text style={styles.text}>
-                    {motivazione === 2
-                        ? "(x) motivi di salute;"
-                        : "( ) motivi di salute;"
-                    }
-                </Text>
-                <Text style={styles.text}>
-                    {motivazione === 3
-                        ? "(x) altri motivi ammessi dalle vigenti normative ovvero dai predetti decreti, ordinanze e altri "
-                        + "provvedimenti che definiscono le misure di prevenzione della diffusione del contagio;" +
-                        "(specificare il motivo che determina lo spostamento)"
-
-                        : "( ) altri motivi ammessi dalle vigenti normative ovvero dai predetti decreti, ordinanze e altri "
-                        + "provvedimenti che definiscono le misure di prevenzione della diffusione del contagio;" +
-                        "(specificare il motivo che determina lo spostamento)"
-                    }
-                </Text>
-                <Text style={styles.text_small}>
-                    __________{reason}_________________
-                </Text>
-
-                <Text style={styles.text} >
-                    -- che lo spostamento è iniziato da (indicare l’indirizzo da cui è iniziato)
-          </Text>
-                <Text style={styles.text}>
-                    _________________{addressStart}_________________
-                </Text>
-                <Text style={styles.text} >
-                    -- con destinazione da (indicare l’indirizzo di destinazione)
-          </Text>
-                <Text style={styles.text}>
-                    _________________{addressEnd}_________________
-                </Text>
-                <Text style={styles.text} >
-                    -- in merito allo spostamento, dichiara inoltre che
-          </Text>
-                <Text style={styles.text}>
-                    __________{reason}__________________
-          </Text>
-
-                <Text style={styles.text} >
-                    Data, ora e luogo del controllo
-          </Text>
-                <Text style={styles.text}>
-                    Firma del dichiarante                                                                                                  L'Operatore di Polizia
-          </Text>
-
-            </Page>
-        </Document>
-    );
-
-
-    const styles = StyleSheet.create({
-        body: {
-            paddingTop: 10,
-            paddingBottom: 10,
-            paddingHorizontal: 35,
-        },
-        title: {
-            fontSize: 16,
-            fontWeight: 700,
-            textAlign: 'center',
-            fontFamily: 'Times-Roman',
-            paddingBottom: 5,
-            paddingTop: 5,
-        },
-        title_small: {
-            fontWeight: 700,
-            fontSize: 15,
-            textAlign: 'center',
-            fontFamily: 'Times-Roman',
-        },
-
-        text: {
-            margin: 10,
-            fontSize: 12,
-            textAlign: 'justify',
-            fontFamily: 'Times-Roman',
-        },
-        text_under: {
-            margin: 10,
-            fontSize: 12,
-            textAlign: 'justify',
-            fontFamily: 'Times-Roman',
-            textDecoration: "underline"
-        },
-        text_small: {
-            marginLeft: 12,
-            fontSize: 10,
-            textAlign: 'justify',
-            fontFamily: 'Times-Roman'
-        },
-
-    }
-    );
-
-    const DownloadPdf = () => {
+    const DownloadPdf = () => { //Genero il pdf usando la lib dedicata
         return useMemo(
             () => (
-                <PDFDownloadLink document={<TestPDF />} fileName="Autodichiarazione.pdf">
+                <PDFDownloadLink
+                    document={<RenderPDF
+                        p_fullName={fullName}
+                        p_birthData={birthData}
+                        p_birthPlace={birthPlace}
+                        p_livePlace={livePlace}
+                        p_liveAddress={liveAddress}
+                        p_domPlace={domPlace}
+                        p_domAddress={domAddress}
+                        p_docType={docType}
+                        p_docNumber={docNumber}
+                        p_docReleasedBy={docReleasedBy}
+                        p_docReleasedDate={docReleasedDate}
+                        p_reason={reason}
+                        p_motivazione={motivazione}
+                        p_addressStart={addressStart}
+                        p_addressEnd={addressEnd}
+                        p_phoneNumber={phoneNumber}
+                    />}
+                    fileName="Autodichiarazione.pdf">
                     {({ loading }) => (loading
                         ? 'loading...'
                         : <Button onClick={() => {
-                            if (saveData) {
+                            if (saveData) { //se l'utente vuole salvare i dati, li salvo in localstorage
                                 userData = {
                                     fullName: fullName,
                                     birthData: birthData,
@@ -241,7 +128,7 @@ export default function RenderFormDichiarazione() {
 
     return (
         < Row style={{ marginTop: "10px" }}>
-            <Col sm="12" style={{ textAlign: "justify" }}>
+            <Col sm="12">
                 <Card>
                     <CardBody>
                         <h4>I tuoi dati anagrafici</h4>
@@ -257,7 +144,7 @@ export default function RenderFormDichiarazione() {
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Numero di telefono</label>
-                                        <FormInput type="tel" defaultValue={phoneNumber} onBlur={(e) => setPhoneNumber(e.target.value)} required placeholder="" />
+                                        <FormInput type="tel" defaultValue={phoneNumber} onBlur={(e) => setPhoneNumber(e.target.value)} required placeholder="34* *******" />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -272,7 +159,7 @@ export default function RenderFormDichiarazione() {
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Luogo di Nascita</label>
-                                        <FormInput required defaultValue={birthPlace} onBlur={(e) => setBirthPlace(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={birthPlace} onBlur={(e) => setBirthPlace(e.target.value)} type="text" placeholder="Città" />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -281,13 +168,13 @@ export default function RenderFormDichiarazione() {
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Città di residenza</label>
-                                        <FormInput required defaultValue={livePlace} onBlur={(e) => setLivePlace(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={livePlace} onBlur={(e) => setLivePlace(e.target.value)} type="text" placeholder="Città" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Indirizzo residenza</label>
-                                        <FormInput required defaultValue={liveAddress} onBlur={(e) => setLiveAdress(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={liveAddress} onBlur={(e) => setLiveAdress(e.target.value)} type="text" placeholder="Indirizzo" />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -296,13 +183,13 @@ export default function RenderFormDichiarazione() {
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Città di domicilio</label>
-                                        <FormInput required defaultValue={domPlace} onBlur={(e) => setDomPlace(e.target.value)} requiredtype="text" />
+                                        <FormInput required defaultValue={domPlace} onBlur={(e) => setDomPlace(e.target.value)} requiredtype="text" placeholder="Città" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Indirizzo domicilio</label>
-                                        <FormInput required defaultValue={domAddress} onBlur={(e) => setDomAddress(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={domAddress} onBlur={(e) => setDomAddress(e.target.value)} type="text" placeholder="Indirizzo" />
                                     </FormGroup>
                                 </Col>
                             </Row><br />
@@ -322,7 +209,7 @@ export default function RenderFormDichiarazione() {
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Numero documento</label>
-                                        <FormInput required defaultValue={docNumber} onBlur={(e) => setDocNumber(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={docNumber} onBlur={(e) => setDocNumber(e.target.value)} type="text" placeholder="..." />
                                     </FormGroup>
                                 </Col>
                             </Row>
@@ -330,7 +217,7 @@ export default function RenderFormDichiarazione() {
                                 <Col sm="12" md="6">
                                     <FormGroup>
                                         <label className="formTitle">Rilasciato da</label>
-                                        <FormInput required defaultValue={docReleasedBy} onBlur={(e) => setDocReleasedBy(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={docReleasedBy} onBlur={(e) => setDocReleasedBy(e.target.value)} type="text" placeholder="..." />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="6">
@@ -346,13 +233,13 @@ export default function RenderFormDichiarazione() {
                                 <Col sm="12" md="12" lg="6">
                                     <FormGroup>
                                         <label>Indirizzo da cui è iniziato lo spostamento</label>
-                                        <FormInput required defaultValue={addressStart} onBlur={(e) => setAddressStart(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={addressStart} onBlur={(e) => setAddressStart(e.target.value)} type="text" placeholder="Indirizzo partenza" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="12" lg="6">
                                     <FormGroup>
                                         <label>Indirizzo di destinazione dello spostamento</label>
-                                        <FormInput required defaultValue={addressEnd} onBlur={(e) => setAddressEnd(e.target.value)} type="text" />
+                                        <FormInput required defaultValue={addressEnd} onBlur={(e) => setAddressEnd(e.target.value)} type="text" placeholder="Indirizzo destinazione" />
                                     </FormGroup>
                                 </Col>
                             </Row><br /><br />
@@ -381,6 +268,7 @@ export default function RenderFormDichiarazione() {
                             <hr />
                             <Row>
                                 <Col sm="12">
+                                    <Alert theme="light"><b>Attenzione!</b> È necessario stampare e firmare il modulo!</Alert>
                                     <FormCheckbox checked={saveData} onChange={(e) => { setSaveData(!saveData) }}>Salva le info sul dispositivo per la prossima volta</FormCheckbox>
                                     <div>
                                         <DownloadPdf />
@@ -402,7 +290,5 @@ export default function RenderFormDichiarazione() {
             </Col>
         </Row >
     )
-
-
 }
 
