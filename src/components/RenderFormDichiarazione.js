@@ -2,7 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react'
 import { Row, Col, Form, FormGroup, FormInput, Card, CardBody, FormRadio, Button, FormCheckbox, FormSelect, Alert } from "shards-react";
 import '../css/formDichiarazione_style.css';
 import { PDFDownloadLink } from '@react-pdf/renderer';
-import RenderPDF from './LayoutPDF'
+import LayoutPDF from './LayoutPDF'
 
 export default function RenderFormDichiarazione() {
     //Dichiaro gli Hook delle info
@@ -18,12 +18,14 @@ export default function RenderFormDichiarazione() {
     const [docReleasedBy, setDocReleasedBy] = useState("")
     const [docReleasedDate, setDocReleasedDate] = useState("")
     const [reason, setReason] = useState("")
-    const [motivazione, setMotivazione] = useState()
+    const [motivazione, setMotivazione] = useState("")
     const [addressStart, setAddressStart] = useState("")
     const [addressEnd, setAddressEnd] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")
     //Hook per localstorage
     const [saveData, setSaveData] = useState(false)
+
+
 
 
     var userData = { //oggetto, lo uso per salvare nel localStorage se richiesto
@@ -74,7 +76,7 @@ export default function RenderFormDichiarazione() {
         return useMemo(
             () => (
                 <PDFDownloadLink
-                    document={<RenderPDF
+                    document={<LayoutPDF
                         p_fullName={fullName}
                         p_birthData={birthData}
                         p_birthPlace={birthPlace}
@@ -232,13 +234,13 @@ export default function RenderFormDichiarazione() {
                             <Row>
                                 <Col sm="12" md="12" lg="6">
                                     <FormGroup>
-                                        <label>Indirizzo da cui è iniziato lo spostamento</label>
+                                        <label>Indirizzo da cui è iniziato lo spostamento 🛫</label>
                                         <FormInput required defaultValue={addressStart} onBlur={(e) => setAddressStart(e.target.value)} type="text" placeholder="Indirizzo partenza" />
                                     </FormGroup>
                                 </Col>
                                 <Col sm="12" md="12" lg="6">
                                     <FormGroup>
-                                        <label>Indirizzo di destinazione dello spostamento</label>
+                                        <label>Indirizzo di destinazione dello spostamento 🛬 </label>
                                         <FormInput required defaultValue={addressEnd} onBlur={(e) => setAddressEnd(e.target.value)} type="text" placeholder="Indirizzo destinazione" />
                                     </FormGroup>
                                 </Col>
@@ -268,7 +270,7 @@ export default function RenderFormDichiarazione() {
                             <hr />
                             <Row>
                                 <Col sm="12">
-                                    <Alert theme="light"><b>Attenzione!</b> È necessario stampare e firmare il modulo!</Alert>
+                                    <Alert theme="light"><b>Attenzione!</b> È necessario stampare e firmare il modulo! 🖨</Alert>
                                     <FormCheckbox checked={saveData} onChange={(e) => { setSaveData(!saveData) }}>Salva le info sul dispositivo per la prossima volta</FormCheckbox>
                                     <div>
                                         <DownloadPdf />
@@ -278,8 +280,8 @@ export default function RenderFormDichiarazione() {
                             </Row><br />
                             <Row>
                                 <Col>
-                                    <p style={{ color: "Red" }}>* I dati inseriti non vengono memorizzati ne trasmessi ad alcuno.<br />
-        * Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso.<br />
+                                    <p style={{ color: "Red" }}>* I dati inseriti non vengono memorizzati ne trasmessi ad alcuno. <br />
+        * Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso. <br />
         * Codice sorgente disponibile al seguente <a href="https://github.com/Daxo32/autodichi">LINK</a></p>
 
                                 </Col>
