@@ -1,0 +1,5 @@
+@media screen and (max-width: 767px) {
+    .main-title, .lead {
+      text-align: left !important;
+    }
+  }

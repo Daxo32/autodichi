@@ -1,6 +1,7 @@
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "shards-ui/dist/css/shards.min.css"
+import "./App.css"
 import { Container, Row, Col, Alert } from "shards-react";
 import RenderFormDichiarazione from './components/RenderFormDichiarazione'
 
@@ -11,7 +12,7 @@ function App() {
       <Container>
         <Row style={{ marginTop: "50px" }}>
           <Col sm="12">
-            <h2 className="text-center">🤟🏼 Genera la tua autodichiarazione </h2><br />
+            <h2 className="text-center main-title">Genera la tua autodichiarazione </h2><br />
             <p className="lead text-center">
               Compila i campi seguenti per generare la tua autodichiarazione per poter circolare!
             </p>
