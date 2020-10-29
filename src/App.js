@@ -22,7 +22,7 @@ function App() {
           </Col>
         </Row>
         <RenderFormDichiarazione />
-        <footer class="my-5 pt-5 text-muted text-center text-small">
+        <footer class="my-4 pt-4 text-muted text-center text-small">
           <p class="mb-1">
             &copy; 2020
             <a target="_blank" href="https://www.linkedin.com/in/davide-canci-638a77140/"> &nbsp;Davide Canci</a>
