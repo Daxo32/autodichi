@@ -18,7 +18,7 @@ export default function RenderFormDichiarazione() {
     const [docReleasedBy, setDocReleasedBy] = useState("")
     const [docReleasedDate, setDocReleasedDate] = useState("")
     const [reason, setReason] = useState("")
-    const [motivazione, setMotivazione] = useState("")
+    const [motivazione, setMotivazione] = useState(1)
     const [addressStart, setAddressStart] = useState("")
     const [addressEnd, setAddressEnd] = useState("")
     const [phoneNumber, setPhoneNumber] = useState("")

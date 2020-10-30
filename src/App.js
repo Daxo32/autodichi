@@ -14,7 +14,7 @@ function App() {
           <Col sm="12">
             <h1 className="text-center main-title">Genera la tua autodichiarazione </h1><br />
             <p className="lead text-center">
-              Compila i campi seguenti per generare la tua autodichiarazione per poter circolare!
+              Compila i campi seguenti per generare la tua autodichiarazione
             </p>
             <Alert theme="light">
               <b>⚠️  &nbsp; Attenzione!</b> Abbiamo aggiornato il modello all'<a href="https://www.interno.gov.it/it/notizie/aggiornato-modello-autodichiarazioni" target="_blank">ultima versione</a> rilasciata dal Ministero dell'Interno 🇮🇹
