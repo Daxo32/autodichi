@@ -280,7 +280,7 @@ export default function RenderFormDichiarazione() {
                             </Row><br />
                             <Row>
                                 <Col>
-                                    <p style={{ color: "Red" }}>* I dati inseriti non vengono memorizzati ne trasmessi ad alcuno. <br />
+                                    <p style={{ color: "Red" }}>* I dati inseriti non vengono memorizzati né trasmessi ad alcuno. <br />
         * Ogni dato inserito resta esclusivamente sul vostro dispositivo e il documento PDF viene generato dal dispositivo stesso. <br />
         * Codice sorgente disponibile al seguente <a href="https://github.com/Daxo32/autodichi">LINK</a></p>
 
